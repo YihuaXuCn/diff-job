@@ -21,11 +21,12 @@ def diffOneFile(filePair):
     cmd = cmd + [file1, file2]
 
     difFolder = 'diffs'
-    file1Name = os.path.basename(file1)[:-3]
+    file1Name = os.path.basename(file1)[:-len('.dif')]
     file1NameFolder = os.path.join(difFolder, file1Name)
     if not os.path.exists(file1NameFolder):
         run(['mkdir','-p',file1NameFolder])
-    difFileName = os.path.basename(file1)[:-3]+"_vs_"+os.path.basename(file2)[:-3] + ".dif"
+    difFileName = os.path.basename(file1)[:-len('.dif')]+"_vs_" \
+                +os.path.basename(file2)[:-len('.dif')] + ".dif"
     difFile = os.path.join(file1NameFolder, difFileName)
     if os.path.exists(difFile):
         return None
@@ -82,17 +83,22 @@ with ProcessPoolExecutor(max_workers=8) as executor:
 evalFnLnCntDict = {}
 for fn in evaluatedFns:
     _, lnCnt = getFileLns(fn)
-    evalFnLnCntDict[os.path.basename(fn)] = lnCnt
+    key = os.path.basename(fn)[:-len('.fn')]
+    evalFnLnCntDict[key] = lnCnt
 
 diffScoresDict = {}
 allDifFiles = runCmdFind('diffs', 'dif')
 print("diff files :{}".format(len(allDifFiles)))
+
+if os.path.exists('diffScores.json'):
+    run(['rm', '-f', 'diffScores.json'])
+
 with ProcessPoolExecutor(max_workers=8) as executor:
     pool = executor.map(getFileLns, allDifFiles)
     for result in pool:
-        diffFileName, lnCnt = result
-        evalFn = diffFileName.split('_vs_')[0]
+        difFileName, lnCnt = result
+        evalFn = os.path.basename(difFileName)[:-len('.dif')].split('_vs_')[0]
         evalFnLnCnt = evalFnLnCntDict[evalFn]
-        diffScoresDict[fileName] = {'lines': lnCnt, 'score' : lnCnt/evalFnLnCnt}
+        diffScoresDict[difFileName] = {'lines': lnCnt, 'score' : int(lnCnt)/int(evalFnLnCnt)}
     with open('diffScores.json', 'w+') as outfile:
         json.dump(diffScoresDict, outfile)
