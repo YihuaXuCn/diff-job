@@ -1,0 +1,3 @@
+function_forwardFunds()internal{
+_escrow.deposit.value(msg.value)(msg.sender);
+}

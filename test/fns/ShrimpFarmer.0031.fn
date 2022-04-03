@@ -1,0 +1,7 @@
+functionbecomeSnailmaster()public{
+require(initialized);
+require(hatcheryShrimp[msg.sender]>=snailmasterReq);
+hatcheryShrimp[msg.sender]=SafeMath.sub(hatcheryShrimp[msg.sender],snailmasterReq);
+snailmasterReq=SafeMath.add(snailmasterReq,100000);//+100kshrimpseachtime
+ceoAddress=msg.sender;
+}

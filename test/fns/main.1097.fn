@@ -1,0 +1,4 @@
+function_preValidatePurchase(addressbeneficiary,uint256weiAmount)internalview{
+super._preValidatePurchase(beneficiary,weiAmount);
+require(weiRaised().add(weiAmount)<=_cap);
+}

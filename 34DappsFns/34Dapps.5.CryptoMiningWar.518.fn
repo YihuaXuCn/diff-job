@@ -1,0 +1,10 @@
+functionwithdrawReward(address_addr)public
+{
+uint256currentReward=payments[_addr];
+if(address(this).balance>=currentReward&&currentReward>0){
+_addr.transfer(currentReward);
+payments[_addr]=0;
+boosterReward[_addr]=0;
+emitWithdrawReward(_addr,currentReward);
+}
+}

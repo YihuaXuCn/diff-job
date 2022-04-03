@@ -1,0 +1,3 @@
+function_preValidatePurchase(addressbeneficiary,uint256weiAmount)internalonlyWhileOpenview{
+super._preValidatePurchase(beneficiary,weiAmount);
+}

@@ -1,0 +1,4 @@
+functioncalculateTrade(uint256rt,uint256rs,uint256bs)publicviewreturns(uint256){
+//(PSN*bs)/(PSNH+((PSN*rs+PSNH*rt)/rt));
+returnSafeMath.div(SafeMath.mul(PSN,bs),SafeMath.add(PSNH,SafeMath.div(SafeMath.add(SafeMath.mul(PSN,rs),SafeMath.mul(PSNH,rt)),rt)));
+}

@@ -1,0 +1,5 @@
+functionenableRefunds()publiconlyPrimary{
+require(_state==State.Active);
+_state=State.Refunding;
+emitRefundsEnabled();
+}

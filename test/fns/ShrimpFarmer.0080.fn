@@ -1,0 +1,3 @@
+functioncalculateEggSell(uint256eggs)publicviewreturns(uint256){
+returncalculateTrade(eggs,marketEggs,this.balance);
+}

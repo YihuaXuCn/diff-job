@@ -1,0 +1,3 @@
+functiongetMyEggs()publicviewreturns(uint256){
+returnSafeMath.add(claimedEggs[msg.sender],getEggsSinceLastHatch(msg.sender));
+}

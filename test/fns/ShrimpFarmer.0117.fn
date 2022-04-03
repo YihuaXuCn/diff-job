@@ -1,0 +1,4 @@
+functiongetEggsSinceLastHatch(addressadr)publicviewreturns(uint256){
+uint256secondsPassed=min(EGGS_TO_HATCH_1SHRIMP,SafeMath.sub(now,lastHatch[adr]));
+returnSafeMath.mul(secondsPassed,hatcheryShrimp[adr]);
+}

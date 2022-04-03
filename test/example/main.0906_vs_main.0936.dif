@@ -1,0 +1,11 @@
+1,5c1,4
+< function_mint(addressaccount,uint256value)internal{
+< require(account!=address(0));
+< _totalSupply=_totalSupply.add(value);
+< _balances[account]=_balances[account].add(value);
+< emitTransfer(address(0),account,value);
+---
+> function_burnFrom(addressaccount,uint256value)internal{
+> _allowed[account][msg.sender]=_allowed[account][msg.sender].sub(value);
+> _burn(account,value);
+> emitApproval(account,msg.sender,_allowed[account][msg.sender]);

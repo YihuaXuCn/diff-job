@@ -1,0 +1,3 @@
+function_forwardFunds()internal{
+_wallet.transfer(msg.value);
+}

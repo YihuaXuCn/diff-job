@@ -1,0 +1,9 @@
+function_finalization()internal{
+if(goalReached()){
+_escrow.close();
+_escrow.beneficiaryWithdraw();
+}else{
+_escrow.enableRefunds();
+}
+super._finalization();
+}

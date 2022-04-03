@@ -1,0 +1,4 @@
+functionhas(Rolestoragerole,addressaccount)internalviewreturns(bool){
+require(account!=address(0));
+returnrole.bearer[account];
+}

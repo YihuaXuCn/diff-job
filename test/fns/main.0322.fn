@@ -1,0 +1,3 @@
+function_processPurchase(addressbeneficiary,uint256tokenAmount)internal{
+_deliverTokens(beneficiary,tokenAmount);
+}

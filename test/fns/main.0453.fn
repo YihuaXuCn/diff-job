@@ -1,0 +1,7 @@
+functionfinalize()public{
+require(!_finalized);
+require(hasClosed());
+_finalized=true;
+_finalization();
+emitCrowdsaleFinalized();
+}

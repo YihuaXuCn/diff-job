@@ -1,0 +1,3 @@
+function_deliverTokens(addressbeneficiary,uint256tokenAmount)internal{
+_token.safeTransfer(beneficiary,tokenAmount);
+}

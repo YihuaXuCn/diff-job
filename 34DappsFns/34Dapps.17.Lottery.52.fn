@@ -1,0 +1,9 @@
+functionaddTokens()payable{
+uintpresent=0;
+uinttokensToAdd=msg.value/(10**18);
+for(uinti=0;i<userAddresses.length;i++){
+if(userAddresses[i]==msg.sender){
+present=1;
+break;
+}
+}

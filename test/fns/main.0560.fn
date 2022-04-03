@@ -1,0 +1,6 @@
+functionwithdraw(addresspayablepayee)publiconlyPrimary{
+uint256payment=_deposits[payee];
+_deposits[payee]=0;
+payee.transfer(payment);
+emitWithdrawn(payee,payment);
+}

@@ -1,0 +1,7 @@
+functioninvest()payablepublic{
+//fix:
+require(now<=closeTime);
+require(raised<goal);
+escrow.deposit.value(msg.value)(msg.sender);
+raised+=msg.value;
+}

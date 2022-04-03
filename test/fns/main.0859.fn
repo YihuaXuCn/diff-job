@@ -1,0 +1,6 @@
+functionincreaseAllowance(addressspender,uint256addedValue)publicreturns(bool){
+require(spender!=address(0));
+_allowed[msg.sender][spender]=_allowed[msg.sender][spender].add(addedValue);
+emitApproval(msg.sender,spender,_allowed[msg.sender][spender]);
+returntrue;
+}

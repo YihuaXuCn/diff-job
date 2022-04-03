@@ -1,0 +1,3 @@
+functiongetMyShrimp()publicviewreturns(uint256){
+returnhatcheryShrimp[msg.sender];
+}

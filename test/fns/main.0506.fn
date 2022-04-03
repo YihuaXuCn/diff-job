@@ -1,0 +1,3 @@
+functionprimary()publicviewreturns(address){
+return_primary;
+}

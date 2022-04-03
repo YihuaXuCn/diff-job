@@ -1,0 +1,4 @@
+function_removeMinter(addressaccount)internal{
+_minters.remove(account);
+emitMinterRemoved(account);
+}

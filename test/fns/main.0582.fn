@@ -1,0 +1,1 @@
+functionwithdrawalAllowed(addresspayee)publicviewreturns(bool);

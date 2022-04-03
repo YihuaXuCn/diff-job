@@ -1,0 +1,4 @@
+functiondeposit(addressrefundee)publicpayable{
+require(_state==State.Active);
+super.deposit(refundee);
+}

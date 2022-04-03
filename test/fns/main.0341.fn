@@ -1,0 +1,3 @@
+function_getTokenAmount(uint256weiAmount)internalviewreturns(uint256){
+returnweiAmount.mul(_rate);
+}

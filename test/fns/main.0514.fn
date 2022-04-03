@@ -1,0 +1,5 @@
+functiontransferPrimary(addressrecipient)publiconlyPrimary{
+require(recipient!=address(0));
+_primary=recipient;
+emitPrimaryTransferred(_primary);
+}

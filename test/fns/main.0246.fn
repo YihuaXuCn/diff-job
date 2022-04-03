@@ -1,0 +1,3 @@
+functionrate()publicviewreturns(uint256){
+return_rate;
+}

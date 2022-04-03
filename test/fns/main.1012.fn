@@ -1,0 +1,4 @@
+function_addMinter(addressaccount)internal{
+_minters.add(account);
+emitMinterAdded(account);
+}

@@ -1,0 +1,3 @@
+functioncap()publicviewreturns(uint256){
+return_cap;
+}

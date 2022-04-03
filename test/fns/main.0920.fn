@@ -1,0 +1,6 @@
+function_burn(addressaccount,uint256value)internal{
+require(account!=address(0));
+_totalSupply=_totalSupply.sub(value);
+_balances[account]=_balances[account].sub(value);
+emitTransfer(account,address(0),value);
+}

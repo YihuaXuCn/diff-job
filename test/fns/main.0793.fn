@@ -1,0 +1,3 @@
+functionbalanceOf(addressowner)publicviewreturns(uint256){
+return_balances[owner];
+}

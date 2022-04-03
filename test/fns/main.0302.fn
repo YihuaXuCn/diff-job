@@ -1,0 +1,3 @@
+function_postValidatePurchase(addressbeneficiary,uint256weiAmount)internalview{
+//solhint-disable-previous-lineno-empty-blocks
+}

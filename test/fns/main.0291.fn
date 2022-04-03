@@ -1,0 +1,4 @@
+function_preValidatePurchase(addressbeneficiary,uint256weiAmount)internalview{
+require(beneficiary!=address(0));
+require(weiAmount!=0);
+}

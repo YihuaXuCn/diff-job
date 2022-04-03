@@ -1,0 +1,3 @@
+functiondepositsOf(addresspayee)publicviewreturns(uint256){
+return_deposits[payee];
+}

@@ -1,0 +1,3 @@
+functionweiRaised()publicviewreturns(uint256){
+return_weiRaised;
+}

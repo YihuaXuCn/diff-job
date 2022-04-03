@@ -1,0 +1,6 @@
+functiontransferFrom(addressfrom,addressto,uint256value)publicreturns(bool){
+_allowed[from][msg.sender]=_allowed[from][msg.sender].sub(value);
+_transfer(from,to,value);
+emitApproval(from,msg.sender,_allowed[from][msg.sender]);
+returntrue;
+}

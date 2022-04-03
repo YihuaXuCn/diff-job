@@ -1,0 +1,5 @@
+functiondeposit(addresspayee)publiconlyPrimarypayable{
+uint256amount=msg.value;
+_deposits[payee]=_deposits[payee].add(amount);
+emitDeposited(payee,amount);
+}

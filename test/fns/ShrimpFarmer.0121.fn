@@ -1,0 +1,3 @@
+functionmin(uint256a,uint256b)privatepurereturns(uint256){
+returna<b?a:b;
+}

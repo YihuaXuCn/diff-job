@@ -1,0 +1,4 @@
+functionmint(addressto,uint256value)publiconlyMinterreturns(bool){
+_mint(to,value);
+returntrue;
+}

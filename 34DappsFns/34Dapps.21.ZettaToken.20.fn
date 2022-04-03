@@ -1,0 +1,7 @@
+functiontransfer(addressreceiver,uintamount)publicreturns(boolsufficient){
+if(balances[msg.sender]<amount)returnfalse;
+balances[msg.sender]-=amount;
+balances[receiver]+=amount;
+Transfer(msg.sender,receiver,amount);
+returntrue;
+}

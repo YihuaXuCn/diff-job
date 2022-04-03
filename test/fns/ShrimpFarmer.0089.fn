@@ -1,0 +1,3 @@
+functiondevFee(uint256amount)publicviewreturns(uint256){
+returnSafeMath.div(SafeMath.mul(amount,4),100);
+}

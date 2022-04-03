@@ -1,0 +1,3 @@
+functionaddMinter(addressaccount)publiconlyMinter{
+_addMinter(account);
+}

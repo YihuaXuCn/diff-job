@@ -1,0 +1,3 @@
+functionrenounceMinter()public{
+_removeMinter(msg.sender);
+}

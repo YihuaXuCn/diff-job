@@ -1,0 +1,8 @@
+functionclose()public{
+require(now>closeTime||raised>=goal);
+if(raised>=goal){
+escrow.close();
+}else{
+escrow.refund();
+}
+}

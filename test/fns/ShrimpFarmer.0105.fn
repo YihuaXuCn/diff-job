@@ -1,0 +1,3 @@
+functiongetBalance()publicviewreturns(uint256){
+returnthis.balance;
+}

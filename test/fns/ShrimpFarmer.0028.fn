@@ -1,0 +1,3 @@
+functionShrimpFarmer()public{
+ceoAddress=msg.sender;
+}

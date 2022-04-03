@@ -1,0 +1,13 @@
+functionplay()payablepublic{
+require(msg.value==playValue);
+require(!stopped);
+if(now>roundEnds){
+if(players.length<2){
+roundEnds=now+roundDuration;
+}else{
+draw();
+}
+}
+players.push(msg.sender);
+amountRised=amountRised.add(msg.value);
+}

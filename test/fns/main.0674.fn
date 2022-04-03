@@ -1,0 +1,3 @@
+functionwithdrawalAllowed(address)publicviewreturns(bool){
+return_state==State.Refunding;
+}

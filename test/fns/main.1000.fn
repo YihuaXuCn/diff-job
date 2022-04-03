@@ -1,0 +1,3 @@
+functionisMinter(addressaccount)publicviewreturns(bool){
+return_minters.has(account);
+}

@@ -1,0 +1,4 @@
+functiontransfer(addressto,uint256value)publicreturns(bool){
+_transfer(msg.sender,to,value);
+returntrue;
+}

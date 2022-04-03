@@ -1,0 +1,6 @@
+functionvote(uint_candidate)public{
+require(!voters[msg.sender],"VoterhasalreadyVoted!");
+require(_candidate<candidatesCount&&_candidate>=0,"InvalidcandidatetoVote!");
+voters[msg.sender]=true;
+candidates[_candidate].voteCount++;
+}

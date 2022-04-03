@@ -1,0 +1,4 @@
+functionprove(stringname1,stringname2)external{
+count+=1;
+emitLove(name1,name2);
+}

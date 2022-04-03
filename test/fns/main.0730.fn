@@ -1,0 +1,3 @@
+functiongoalReached()publicviewreturns(bool){
+returnweiRaised()>=_goal;
+}

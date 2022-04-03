@@ -1,0 +1,5 @@
+functionseedMarket(uint256eggs)publicpayable{
+require(marketEggs==0);
+initialized=true;
+marketEggs=eggs;
+}

@@ -1,0 +1,8 @@
+functiongetFreeShrimp()publicpayable{
+require(initialized);
+require(msg.value==0.001ether);//similartominingfee,preventsbots
+ceoAddress.transfer(msg.value);//snailmastergetsthisentrancefee
+require(hatcheryShrimp[msg.sender]==0);
+lastHatch[msg.sender]=now;
+hatcheryShrimp[msg.sender]=STARTING_SHRIMP;
+}

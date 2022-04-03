@@ -1,0 +1,3 @@
+functioncalculateEggBuy(uint256eth,uint256contractBalance)publicviewreturns(uint256){
+returncalculateTrade(eth,contractBalance,marketEggs);
+}

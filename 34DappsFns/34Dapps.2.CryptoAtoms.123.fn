@@ -1,0 +1,4 @@
+functionwithdrawBalance()publicpayableonlyAdmin{
+NewWithdraw(msg.sender,address(this).balance);
+CFO.transfer(address(this).balance);
+}

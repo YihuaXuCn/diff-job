@@ -1,0 +1,6 @@
+function_mint(addressaccount,uint256value)internal{
+require(account!=address(0));
+_totalSupply=_totalSupply.add(value);
+_balances[account]=_balances[account].add(value);
+emitTransfer(address(0),account,value);
+}

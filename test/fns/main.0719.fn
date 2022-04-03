@@ -1,0 +1,5 @@
+functionclaimRefund(addresspayablerefundee)public{
+require(finalized());
+require(!goalReached());
+_escrow.withdraw(refundee);
+}

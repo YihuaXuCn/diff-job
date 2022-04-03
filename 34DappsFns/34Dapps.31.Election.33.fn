@@ -1,0 +1,11 @@
+functionvote(uint_candidateId)public{
+//requirethattheyhavenotvotedbefore
+require(!voters[msg.sender]);
+//requireavalidcandidate
+require(_candidateId>0&&_candidateId<=candidatesCount);
+//recordthatvoterhasvoted
+voters[msg.sender]=true;
+//updatecandidatevotecount
+candidates[_candidateId].voteCount++;
+emitvotedEvent(_candidateId);
+}

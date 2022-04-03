@@ -1,0 +1,4 @@
+function_deliverTokens(addressbeneficiary,uint256tokenAmount)internal{
+//Potentiallydangerousassumptionaboutthetypeofthetoken.
+require(ERC20Mintable(address(token())).mint(beneficiary,tokenAmount));
+}

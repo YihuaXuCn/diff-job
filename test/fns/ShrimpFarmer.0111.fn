@@ -1,0 +1,3 @@
+functiongetSnailmasterReq()publicviewreturns(uint256){
+returnsnailmasterReq;
+}

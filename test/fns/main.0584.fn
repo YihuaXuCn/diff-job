@@ -1,0 +1,4 @@
+functionwithdraw(addresspayablepayee)public{
+require(withdrawalAllowed(payee));
+super.withdraw(payee);
+}

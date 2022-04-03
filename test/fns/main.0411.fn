@@ -1,0 +1,4 @@
+functionhasClosed()publicviewreturns(bool){
+//solhint-disable-next-linenot-rely-on-time
+returnblock.timestamp>_closingTime;
+}

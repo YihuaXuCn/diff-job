@@ -1,0 +1,3 @@
+functiongoal()publicviewreturns(uint256){
+return_goal;
+}

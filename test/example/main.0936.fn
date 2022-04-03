@@ -1,0 +1,5 @@
+function_burnFrom(addressaccount,uint256value)internal{
+_allowed[account][msg.sender]=_allowed[account][msg.sender].sub(value);
+_burn(account,value);
+emitApproval(account,msg.sender,_allowed[account][msg.sender]);
+}

@@ -1,0 +1,4 @@
+functionvoteForCandidate(bytes32candidate)public{
+require(validCandidate(candidate));
+votesReceived[candidate]+=1;
+}

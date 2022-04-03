@@ -1,0 +1,16 @@
+functionvote(uint8_proposal)public{
+require(block.timestamp<endTime,"Voteexpired.");
+require(_proposal>=1&&_proposal<=3,"Invalidproposal.");
+require(!voted[msg.sender],"Cannotvoteagain.");
+voted[msg.sender]=true;
+if(_proposal==1){
+proposalA++;
+}
+elseif(_proposal==2){
+proposalB++;
+}
+elseif(_proposal==3){
+proposalC++;
+}
+emitVoted(msg.sender,_proposal);
+}

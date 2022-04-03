@@ -1,0 +1,3 @@
+functionallowance(addressowner,addressspender)publicviewreturns(uint256){
+return_allowed[owner][spender];
+}

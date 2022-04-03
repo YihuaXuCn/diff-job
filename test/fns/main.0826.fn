@@ -1,0 +1,6 @@
+functionapprove(addressspender,uint256value)publicreturns(bool){
+require(spender!=address(0));
+_allowed[msg.sender][spender]=value;
+emitApproval(msg.sender,spender,value);
+returntrue;
+}

@@ -1,0 +1,4 @@
+functionbeneficiaryWithdraw()public{
+require(_state==State.Closed);
+_beneficiary.transfer(address(this).balance);
+}

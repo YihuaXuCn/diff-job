@@ -1,0 +1,3 @@
+functiondecimals()publicviewreturns(uint8){
+return_decimals;
+}

@@ -1,0 +1,3 @@
+functiontoken()publicviewreturns(IERC20){
+return_token;
+}

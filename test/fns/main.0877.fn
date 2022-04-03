@@ -1,0 +1,6 @@
+functiondecreaseAllowance(addressspender,uint256subtractedValue)publicreturns(bool){
+require(spender!=address(0));
+_allowed[msg.sender][spender]=_allowed[msg.sender][spender].sub(subtractedValue);
+emitApproval(msg.sender,spender,_allowed[msg.sender][spender]);
+returntrue;
+}

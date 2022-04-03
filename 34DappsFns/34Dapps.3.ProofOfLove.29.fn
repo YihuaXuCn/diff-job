@@ -1,0 +1,4 @@
+functiondeposit()
+publicpayable{
+get_relay_hub().depositFor.value(msg.value)(address(this));
+}

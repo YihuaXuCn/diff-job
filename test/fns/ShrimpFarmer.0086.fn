@@ -1,0 +1,3 @@
+functioncalculateEggBuySimple(uint256eth)publicviewreturns(uint256){
+returncalculateEggBuy(eth,this.balance);
+}
