@@ -1,5 +1,4 @@
 functioncloseGame()returns(address){
-//canonlybecalledmytheownerofthecontract
 require(owner==msg.sender);
 addresswinner=winnerAddress();
 returnwinner;

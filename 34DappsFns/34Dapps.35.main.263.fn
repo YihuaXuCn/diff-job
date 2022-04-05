@@ -1,9 +1,7 @@
 functionbuyTokens(addressbeneficiary)publicnonReentrantpayable{
 uint256weiAmount=msg.value;
 _preValidatePurchase(beneficiary,weiAmount);
-//calculatetokenamounttobecreated
 uint256tokens=_getTokenAmount(weiAmount);
-//updatestate
 _weiRaised=_weiRaised.add(weiAmount);
 _processPurchase(beneficiary,tokens);
 emitTokensPurchased(msg.sender,beneficiary,weiAmount,tokens);

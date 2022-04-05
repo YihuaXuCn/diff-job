@@ -15,18 +15,18 @@ def runCmdFind(folder, fileType):
     return files
 
 def diffOneFile(filePair):
-    file1, file2 = filePair
+    fnfile1, fnfile2 = filePair
     cmdStr = "diff -i"
     cmd = cmdStr.split(' ')
-    cmd = cmd + [file1, file2]
+    cmd = cmd + [fnfile1, fnfile2]
 
     difFolder = 'diffs'
-    file1Name = os.path.basename(file1)[:-len('.dif')]
+    file1Name = os.path.basename(fnfile1)[:-len('.fn')]
     file1NameFolder = os.path.join(difFolder, file1Name)
     if not os.path.exists(file1NameFolder):
         run(['mkdir','-p',file1NameFolder])
-    difFileName = os.path.basename(file1)[:-len('.dif')]+"_vs_" \
-                +os.path.basename(file2)[:-len('.dif')] + ".dif"
+    difFileName = os.path.basename(fnfile1)[:-len('.fn')]+"_vs_" \
+                +os.path.basename(fnfile2)[:-len('.fn')] + ".dif"
     difFile = os.path.join(file1NameFolder, difFileName)
     if os.path.exists(difFile):
         return None
@@ -99,6 +99,8 @@ with ProcessPoolExecutor(max_workers=8) as executor:
         difFileName, lnCnt = result
         evalFn = os.path.basename(difFileName)[:-len('.dif')].split('_vs_')[0]
         evalFnLnCnt = evalFnLnCntDict[evalFn]
-        diffScoresDict[difFileName] = {'lines': lnCnt, 'score' : int(lnCnt)/int(evalFnLnCnt)}
+        diffScoresDict[difFileName] = int(lnCnt)/int(evalFnLnCnt)
+    sortedDiffScores = sorted(diffScoresDict.items(), key=lambda x: x[1])
+    sortedDiffScoresDict = { e[0]: e[1] for e in sortedDiffScores}
     with open('diffScores.json', 'w+') as outfile:
-        json.dump(diffScoresDict, outfile)
+        json.dump(sortedDiffScoresDict, outfile, indent=4)

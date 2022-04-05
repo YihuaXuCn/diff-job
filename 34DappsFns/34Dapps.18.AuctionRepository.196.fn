@@ -1,14 +1,12 @@
 functioncancelAuction(uint_auctionId)publicisOwner(_auctionId){
 AuctionmemorymyAuction=auctions[_auctionId];
 uintbidsLength=auctionBids[_auctionId].length;
-//iftherearebidsrefundthelastbid
 if(bidsLength>0){
 BidmemorylastBid=auctionBids[_auctionId][bidsLength-1];
 if(!lastBid.from.send(lastBid.amount)){
 revert();
 }
 }
-//approveandtransferfromthiscontracttoauctionowner
 if(approveAndTransfer(address(this),myAuction.owner,myAuction.deedRepositoryAddress,myAuction.deedId)){
 auctions[_auctionId].active=false;
 emitAuctionCanceled(msg.sender,_auctionId);

@@ -1,12 +1,7 @@
 functionvote(uint_candidateId)public{
-//requirethattheyhaven'tvotedbefore
 require(!voters[msg.sender],"Voterhasalreadyvoted");
-//requireavalidcandidate
 require(_candidateId>0&&_candidateId<=candidatesCount,"Candidatedoesn'texist");
-//recordavoterhasvoted
 voters[msg.sender]=true;
-//updatecandidatecount
 candidates[_candidateId].voteCount++;
-//triggerevent
 emitvotedEvent(_candidateId);
 }

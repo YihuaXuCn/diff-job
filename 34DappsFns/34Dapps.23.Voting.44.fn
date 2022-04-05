@@ -1,8 +1,5 @@
 functionvote(uintproposalInt,uintvoteValue)publicreturns(bool){
-if(proposals[proposalInt].voters[msg.sender].voted==false){//checkduplicatekey
-require(voteValue==1||voteValue==2||voteValue==3);//checkvoteValue
-Proposalstoragep=proposals[proposalInt];//Gettheproposal
-if(voteValue==1){
+if(proposals[proposalInt].voters[msg.sender].voted==false){require(voteValue==1||voteValue==2||voteValue==3);Proposalstoragep=proposals[proposalInt];if(voteValue==1){
 p.voteCountPos+=1;
 }elseif(voteValue==2){
 p.voteCountNeg+=1;

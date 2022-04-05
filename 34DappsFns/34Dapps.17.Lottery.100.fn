@@ -4,11 +4,8 @@ addresswinner=winnerAddress();
 if(winner==owner){
 owner.transfer(address(this).balance);
 }else{
-//returnsthehalfthebalanceofthecontract
 uinttoTransfer=address(this).balance/2;
-//transfer50%tothewinner
 winner.transfer(toTransfer);
-//transferrestofthebalancetotheownerofthecontract
 owner.transfer(address(this).balance);
 }
 returnaddress(this).balance;

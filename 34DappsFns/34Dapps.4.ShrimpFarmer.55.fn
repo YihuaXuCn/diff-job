@@ -3,7 +3,6 @@ require(initialized);
 uint256hasEggs=getMyEggs();
 uint256eggValue=calculateEggSell(hasEggs);
 uint256fee=devFee(eggValue);
-//killonethirdoftheowner'ssnailsoneggsale
 hatcheryShrimp[msg.sender]=SafeMath.mul(SafeMath.div(hatcheryShrimp[msg.sender],3),2);
 claimedEggs[msg.sender]=0;
 lastHatch[msg.sender]=now;

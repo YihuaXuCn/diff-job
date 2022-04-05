@@ -21,7 +21,6 @@ updateCrystal(beneficiary);
 uint256level=getCurrentLevel(b.startingLevel,b.startingTime,b.halfLife);
 b.startingLevel=SafeMath.add(level,1);
 b.startingTime=now;
-//transferownership
 b.owner=msg.sender;
 emitBuyBooster(msg.sender,roundNumber,idx,msg.value,beneficiary,refundPrize);
 }

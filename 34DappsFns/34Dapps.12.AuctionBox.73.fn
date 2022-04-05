@@ -1,13 +1,9 @@
 functionplaceBid()publicpayablenotOwnerreturns(bool){
 require(auctionState==State.Running);
 require(msg.value>0);
-//updatethecurrentbid
-//uintcurrentBid=bids[msg.sender]+msg.value;
 uintcurrentBid=bids[msg.sender].add(msg.value);
 require(currentBid>highestPrice);
-//setthecurrentBidlinkswithmsg.sender
 bids[msg.sender]=currentBid;
-//updatethehighestprice
 highestPrice=currentBid;
 highestBidder=msg.sender;
 returntrue;
