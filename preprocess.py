@@ -42,15 +42,19 @@ files = process.stdout.decode('utf-8').split('\n')[:-1]
 
 i = args.indexOfData
 s = args.sliceNumb
-sliceLen = len(files)//(s-1)
-print("total files : {} \t sliceLen : {} \t index : {}".format(len(files), sliceLen, i))
-dataSlice = files[sliceLen*i : sliceLen*(i+1)] if i < (s-1) else files[sliceLen*i:]
-for i, fnFile in enumerate(dataSlice, start=1):
+fixedNumbFiles = round(len(files)/s)
+print("total files : {} \t fixedNumbFiles : {} \t index : {}".format(len(files), fixedNumbFiles, i))
+if (i+1)*fixedNumbFiles <= len(files):
+    datasetSliced = files[fixedNumbFiles*i : fixedNumbFiles*(i+1)]
+else:
+    datasetSliced = files[fixedNumbFiles*i:]
+
+for i, fnFile in enumerate(datasetSliced, start=1):
     preprocessOneFile(fnFile)
     if i % 20000 == 0:
         print("{} files have been done".format(i))
 
-
+print("preprocess done")
 
 # with ProcessPoolExecutor(max_workers=4) as executor:
 #     # folder = args.directory

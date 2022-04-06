@@ -26,6 +26,8 @@ def diffOneFile(filePair):
     cmd = cmdStr.split(' ')
     cmd = cmd + [fnfile1, fnfile2]
 
+    if os.path.exists('diffs'):
+        run(['mkdir','-p','diffs'])
     difFolder = 'diffs'
     file1Name = os.path.basename(fnfile1)[:-len('.fn')]
     file1NameFolder = os.path.join(difFolder, file1Name)
@@ -68,7 +70,7 @@ if not paralMode:
     datasetFns = runCmdFind(folder, 'fn')
     i = args.index
     s = args.sliceNumb
-    fixedNumb = len(datasetFns)//(s-1)
+    fixedNumbFiles = round(len(datasetFns)/s)
     if (i+1)*fixedNumb > len(datasetFns) :
         datasetFns = datasetFns[i*fixedNumb :]
     else:
@@ -121,10 +123,10 @@ diffScoresDict = {}
 allDifFiles = runCmdFind('diffs', 'dif')
 print("diff files :{}".format(len(allDifFiles)))
 
-if os.path.exists('diffScores.json'):
-    run(['rm', '-f', 'diffScores.json'])
-
 difScrFile = args.diffScore
+if os.path.exists(difScrFile):
+    run(['rm', '-f', difScrFile])
+
 if not paralMode:
     for difFile in allDifFiles:
         _, lnCnt = getFileLns(allDifFiles)
