@@ -68,9 +68,9 @@ folder = args.directory
 # splite dataset into pices for speeding up in linear mode
 if not paralMode:
     datasetFns = runCmdFind(folder, 'fn')
-    i = args.index
+    i = args.indexOfData
     s = args.sliceNumb
-    fixedNumbFiles = round(len(datasetFns)/s)
+    fixedNumb = round(len(datasetFns)/s)
     if (i+1)*fixedNumb > len(datasetFns) :
         datasetFns = datasetFns[i*fixedNumb :]
     else:
