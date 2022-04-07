@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-d', "--directory", type=str, help="path of a folder", required=True)
 parser.add_argument('-ot', "--overtime", type=str, help="output overtime file name", required=True)
 parser.add_argument('-ds', "--diffScore", type=str, help="output diffScores", required=True)
+parser.add_argument('-skip', "--skipDiffMake", type=None, help="skip diff file making", default=True)
 if not paralMode:
     parser.add_argument('-i', "--indexOfData", type=int, help="index of data slices", required=True)
     parser.add_argument('-s', "--sliceNumb", type=int, help="total numbers of data slices", required=True)
@@ -61,56 +62,59 @@ def getFileLns(file):
     result = process.stdout.decode("utf-8").split(' ')[0]
     return file, result
 
-
+print("start")
 evaluatedFns = runCmdFind('34DappsFns', 'fn')
+skipDiffMk = args.skipDiffMake
 
-folder = args.directory
-# splite dataset into pices for speeding up in linear mode
-if not paralMode:
-    datasetFns = runCmdFind(folder, 'fn')
-    i = args.indexOfData
-    s = args.sliceNumb
-    fixedNumb = round(len(datasetFns)/s)
-    if (i+1)*fixedNumb > len(datasetFns) :
-        datasetFns = datasetFns[i*fixedNumb :]
-    else:
-        datasetFns = datasetFns[i*fixedNumb : (i+1)*fixedNumb]
-else:
-    datasetFns = runCmdFind(folder, 'fn')
-
-# convinient for parallel mode 
-filePairList = []
-if os.path.exists('nameErr.txt'):
-    run(['rm', 'nameErr.txt'])
-for file1 in evaluatedFns:
-    for file2 in datasetFns:
-        filePairList.append((file1,file2))
-
-failed = []
-if not paralMode:
-    for difFilePair in filePairList:
-        timeoutFile = diffOneFile(difFilePair)
-        if not timeoutFile:
-            continue
+if not skipDiffMk:
+    folder = args.directory
+    # splite dataset into pices for speeding up in linear mode
+    if not paralMode:
+        datasetFns = runCmdFind(folder, 'fn')
+        i = args.indexOfData
+        s = args.sliceNumb
+        fixedNumb = round(len(datasetFns)/s)
+        if (i+1)*fixedNumb > len(datasetFns) :
+            datasetFns = datasetFns[i*fixedNumb :]
         else:
-            failed.append('{}\t{}\n'.format('timeover',timeoutFile))
-    if len(failed) != 0:
-        with open(args.overtime,'w+') as fd:
-            fd.writelines(failed)
-else:
-    with ProcessPoolExecutor(max_workers=8) as executor:
-        failed = []
-        pool = executor.map(diffOneFile, filePairList)
-
-        for res in pool:
-            if res == None:
+            datasetFns = datasetFns[i*fixedNumb : (i+1)*fixedNumb]
+    else:
+        datasetFns = runCmdFind(folder, 'fn')
+    print("read 34DappsFns done")
+    # convinient for parallel mode 
+    filePairList = []
+    if os.path.exists('nameErr.txt'):
+        run(['rm', 'nameErr.txt'])
+    for file1 in evaluatedFns:
+        for file2 in datasetFns:
+            filePairList.append((file1,file2))
+    print("prepare file pairs")
+    failed = []
+    if not paralMode:
+        print("start diff job")
+        for difFilePair in filePairList:
+            timeoutFile = diffOneFile(difFilePair)
+            if not timeoutFile:
                 continue
-            failed.append('{}\t{}\n'.format('timeover',res))
-        # failed = [f for f in failed]
+            else:
+                failed.append('{}\t{}\n'.format('timeover',timeoutFile))
         if len(failed) != 0:
-            fd = open(args.overtime,'w+')
-            fd.writelines(failed)
-            fd.close()
+            with open(args.overtime,'w+') as fd:
+                fd.writelines(failed)
+    else:
+        with ProcessPoolExecutor(max_workers=8) as executor:
+            failed = []
+            pool = executor.map(diffOneFile, filePairList)
+
+            for res in pool:
+                if res == None:
+                    continue
+                failed.append('{}\t{}\n'.format('timeover',res))
+            # failed = [f for f in failed]
+            if len(failed) != 0:
+                fd = open(args.overtime,'w+')
+                fd.writelines(failed)
+                fd.close()
 
 # calculate diff scores
 evalFnLnCntDict = {}
@@ -128,11 +132,13 @@ if os.path.exists(difScrFile):
     run(['rm', '-f', difScrFile])
 
 if not paralMode:
+    print("start diff score computing")
     for difFile in allDifFiles:
-        _, lnCnt = getFileLns(allDifFiles)
+        difFileName, lnCnt = getFileLns(difFile)
         evalFn = os.path.basename(difFileName)[:-len('.dif')].split('_vs_')[0]
         evalFnLnCnt = evalFnLnCntDict[evalFn]
         diffScoresDict[difFileName] = int(lnCnt)/int(evalFnLnCnt)
+    print("sorting record in an ascending order")
     sortedDiffScores = sorted(diffScoresDict.items(), key=lambda x: x[1])
     sortedDiffScoresDict = { e[0]: e[1] for e in sortedDiffScores}
     with open(difScrFile, 'w+') as outfile:
@@ -149,3 +155,5 @@ else:
         sortedDiffScoresDict = { e[0]: e[1] for e in sortedDiffScores}
         with open('diffScores.json', 'w+') as outfile:
             json.dump(sortedDiffScoresDict, outfile, indent=4)
+
+print("diff Job done")
