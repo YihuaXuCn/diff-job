@@ -32,3 +32,6 @@ shell_4:
 python3 preprocess.py -d ./dataset/ -i 3 -s 4 && python3 diffJob.py -d ./dataset/ -ot overtime -ds diffScore_3.json -s 4 -i 3
 
 you can adjust the argument of '-s' depending on your machine
+
+### notice
+if it is crashed after 'preprocess done', you won't need to run preprocess again but just to run diffJob.
