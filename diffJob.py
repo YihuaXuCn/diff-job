@@ -123,21 +123,30 @@ for fn in evaluatedFns:
     key = os.path.basename(fn)[:-len('.fn')]
     evalFnLnCntDict[key] = lnCnt
 
-diffScoresDict = {}
-allDifFiles = runCmdFind('diffs', 'dif')
-print("diff files :{}".format(len(allDifFiles)))
-
-difScrFile = args.diffScore
-if os.path.exists(difScrFile):
-    run(['rm', '-f', difScrFile])
 
 if not paralMode:
+    diffScoresDict = {}
+    allDifFiles = runCmdFind('diffs', 'dif')
+    i = args.indexOfData
+    s = args.sliceNumb
+    fixedNumb = round(len(allDifFiles)/s)
+    if (i+1)*fixedNumb > len(allDifFiles) :
+        allDifFiles = allDifFiles[i*fixedNumb :]
+    else:
+        allDifFiles = allDifFiles[i*fixedNumb : (i+1)*fixedNumb]
+    print("diff files :{}".format(len(allDifFiles)))
+
+    difScrFile = args.diffScore
+    if os.path.exists(difScrFile):
+        run(['rm', '-f', difScrFile])
     print("start diff score computing")
-    for difFile in allDifFiles:
+    for i, difFile in enumerate(allDifFiles, start=1):
         difFileName, lnCnt = getFileLns(difFile)
         evalFn = os.path.basename(difFileName)[:-len('.dif')].split('_vs_')[0]
         evalFnLnCnt = evalFnLnCntDict[evalFn]
         diffScoresDict[difFileName] = int(lnCnt)/int(evalFnLnCnt)
+        if i % (fixedNumb//10) == 0:
+            print("got {} diff scores".format(i))
     print("sorting record in an ascending order")
     sortedDiffScores = sorted(diffScoresDict.items(), key=lambda x: x[1])
     sortedDiffScoresDict = { e[0]: e[1] for e in sortedDiffScores}
